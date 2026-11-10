@@ -1,0 +1,211 @@
+/* ======================================
+   MENU MANAGEMENT STYLING
+====================================== */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+.sidebar-nav {
+    display: flex;
+    gap: 20px;
+    padding: 18px 24px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-nav a {
+    color: #3a4d9f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.page-content {
+    padding: 20px;
+}
+
+/* Page heading */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.page-header h1 {
+    margin-bottom: 5px;
+}
+
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #641e36;
+    color: white;
+}
+
+.btn-secondary {
+    background: #555;
+    color: white;
+}
+
+.btn-edit {
+    background: #2471a3;
+    color: white;
+}
+
+.btn-delete {
+    background: #c0392b;
+    color: white;
+}
+
+
+/* Search and filter section */
+.filter-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-section form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-section input,
+.filter-section select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/* Table container */
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+table th {
+    background: #f4f4f4;
+}
+
+
+/* Availability status */
+.status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.available {
+    background: #d5f5e3;
+    color: #196f3d;
+}
+
+.unavailable {
+    background: #fadbd8;
+    color: #922b21;
+}
+
+
+/* Form styling */
+.form-container {
+    max-width: 650px;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+}
+
+.error-text {
+    display: block;
+    color: red;
+    margin-top: 5px;
+}
+
+.alert {
+    background: #d5f5e3;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.alert.error {
+    background: #fadbd8;
+    color: #922b21;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-section form {
+        flex-direction: column;
+    }
+
+    .filter-section input,
+    .filter-section select,
+    .filter-section button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}

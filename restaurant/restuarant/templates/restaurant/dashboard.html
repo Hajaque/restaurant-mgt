@@ -1,0 +1,58 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<!-- =========================================
+     DASHBOARD HEADER
+========================================= -->
+<div class="page-header">
+
+    <div>
+        <h1>Restaurant Dashboard</h1>
+        <p>Welcome to 24_DHOROU Restaurant Management System.</p>
+    </div>
+
+    <a href="{% url 'add_menu_item' %}" class="btn btn-primary">
+        + Add Menu Item
+    </a>
+
+</div>
+
+
+<!-- =========================================
+     DASHBOARD STATISTICS
+========================================= -->
+<div class="dashboard-cards">
+
+    <!-- Total Menu Items -->
+    <div class="dashboard-card">
+        <div class="card-icon"></div>
+
+        <div>
+            <h3>Total Menu Items</h3>
+            <p>{{ total_menu_items }}</p>
+        </div>
+    </div>
+
+    <!-- Total Orders -->
+    <div class="dashboard-card">
+        <div class="card-icon"></div>
+
+        <div>
+            <h3>Total Orders</h3>
+            <p>{{ total_orders }}</p>
+        </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="dashboard-card">
+        <div class="card-icon"></div>
+
+        <div>
+            <h3>Total Revenue</h3>
+            <p>${{ total_revenue|floatformat:2 }}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

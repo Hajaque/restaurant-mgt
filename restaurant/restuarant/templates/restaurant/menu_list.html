@@ -1,0 +1,181 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>Menu Management</h1>
+        <p>Manage all restaurant food, drinks and desserts.</p>
+    </div>
+
+    <a href="{% url 'add_menu_item' %}" class="btn btn-primary">
+        + Add Menu Item
+    </a>
+</div>
+
+
+<!-- Display success and error messages -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<!-- SEARCH AND FILTER FORM -->
+<div class="filter-section">
+
+    <form method="GET" action="{% url 'menu_list' %}">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search menu items..."
+            value="{{ search_query }}"
+        >
+
+        <select name="category">
+
+            <option value="">All Categories</option>
+
+            {% for value, label in categories %}
+
+                <option
+                    value="{{ value }}"
+                    {% if selected_category == value %}selected{% endif %}
+                >
+                    {{ label }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <select name="availability">
+
+            <option value="">All Availability</option>
+
+            <option
+                value="available"
+                {% if selected_availability == 'available' %}selected{% endif %}
+            >
+                Available
+            </option>
+
+            <option
+                value="unavailable"
+                {% if selected_availability == 'unavailable' %}selected{% endif %}
+            >
+                Unavailable
+            </option>
+
+        </select>
+
+        <button type="submit" class="btn btn-primary">
+            Search / Filter
+        </button>
+
+        <a href="{% url 'menu_list' %}" class="btn btn-secondary">
+            Reset
+        </a>
+
+    </form>
+
+</div>
+
+
+<!-- MENU ITEMS TABLE -->
+<div class="table-container">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Base Price</th>
+                <th>Selling Price</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            {% for item in menu_items %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>{{ item.name }}</td>
+
+                    <td>{{ item.description|default:"No description" }}</td>
+
+                    <td>{{ item.get_category_display }}</td>
+
+                    <td>{{ item.price }}</td>
+
+                    <td>{{ item.selling_price }}</td>
+
+                    <td>
+
+                        {% if item.is_available %}
+
+                            <span class="status available">
+                                Available
+                            </span>
+
+                        {% else %}
+
+                            <span class="status unavailable">
+                                Unavailable
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'edit_menu_item' item.id %}"
+                            class="btn btn-edit"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="{% url 'delete_menu_item' item.id %}"
+                            class="btn btn-delete"
+                        >
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="8">
+                        No menu items found.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
