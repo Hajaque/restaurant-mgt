@@ -1,0 +1,140 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="page-header">
+
+    <div>
+        <h1>Order Details</h1>
+        <p>Information about order #{{ order.id }}.</p>
+    </div>
+
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">
+        Back to Orders
+    </a>
+
+</div>
+
+
+<!-- Customer information -->
+<div class="form-container">
+
+    <h3>Customer Information</h3>
+
+    <p>
+        <strong>Order ID:</strong>
+        #{{ order.id }}
+    </p>
+
+    <p>
+        <strong>Customer Name:</strong>
+        {{ order.customer_name }}
+    </p>
+
+    <p>
+        <strong>Table Number:</strong>
+        {{ order.table_number }}
+    </p>
+
+    <p>
+        <strong>Date Created:</strong>
+        {{ order.created_at|date:"d M Y, H:i" }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+
+        {% if order.status == 'ACTIVE' %}
+
+            <span class="status available">Active</span>
+
+        {% elif order.status == 'COMPLETED' %}
+
+            <span class="status completed">Completed</span>
+
+        {% else %}
+
+            <span class="status unavailable">Cancelled</span>
+
+        {% endif %}
+
+    </p>
+
+</div>
+
+
+<br>
+
+
+<!-- Ordered items -->
+<div class="table-container">
+
+    <h3>Ordered Items</h3>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>#</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for item in order_items %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>{{ item.item_name }}</td>
+
+                    <td>{{ item.quantity }}</td>
+
+                    <td>
+                        {{ item.unit_price|floatformat:2 }}
+                    </td>
+
+                    <td>
+                        {{ item.line_total|floatformat:2 }}
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+                    <td colspan="5">
+                        No items have been added to this order.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <!-- Order total -->
+    <div class="order-total">
+
+        <h3>
+            Total Amount:
+            {{ order.total_amount|floatformat:2 }}
+        </h3>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

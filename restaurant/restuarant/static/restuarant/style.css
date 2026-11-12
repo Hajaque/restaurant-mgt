@@ -209,3 +209,56 @@ table th {
     }
 
 }
+/* =========================================
+   ORDER MANAGEMENT STYLES
+========================================= */
+
+/* Order item rows */
+.order-item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 15px;
+    align-items: end;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+
+/* Form actions */
+.form-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Completed order status */
+.status.completed {
+    background: #d6eaf8;
+    color: #21618c;
+}
+
+
+/* Order total */
+.order-total {
+    text-align: right;
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 2px solid #eee;
+}
+
+
+/* Responsive order form */
+@media (max-width: 768px) {
+
+    .order-item-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+}

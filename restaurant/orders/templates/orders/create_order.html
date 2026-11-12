@@ -1,0 +1,143 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="page-header">
+
+    <div>
+        <h1>Create New Order</h1>
+        <p>Enter customer details and select menu items.</p>
+    </div>
+
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">
+        Back to Orders
+    </a>
+
+</div>
+
+
+<!-- Display notifications -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<!-- Order creation form -->
+<div class="form-container">
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <!-- Customer information -->
+        <h3>Customer Information</h3>
+
+        <div class="form-group">
+
+            <label for="{{ order_form.customer_name.id_for_label }}">
+                Customer Name
+            </label>
+
+            {{ order_form.customer_name }}
+
+            {{ order_form.customer_name.errors }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="{{ order_form.table_number.id_for_label }}">
+                Table Number
+            </label>
+
+            {{ order_form.table_number }}
+
+            {{ order_form.table_number.errors }}
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- Order items section -->
+        <h3>Order Items</h3>
+
+        <p>Select the menu items requested by the customer.</p>
+
+
+        <!-- Management form is required for Django formsets -->
+        {{ item_formset.management_form }}
+
+        {{ item_formset.non_form_errors }}
+
+
+        <div id="order-items-container">
+
+            {% for form in item_formset %}
+
+                <div class="order-item-row">
+
+                    {{ form.id }}
+
+                    <div class="form-group">
+
+                        <label>Menu Item</label>
+
+                        {{ form.menu_item }}
+
+                        {{ form.menu_item.errors }}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Quantity</label>
+
+                        {{ form.quantity }}
+
+                        {{ form.quantity.errors }}
+
+                    </div>
+
+
+                    {% if form.DELETE %}
+                        <div class="form-group">
+                            <label>Remove Item</label>
+                            {{ form.DELETE }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="form-actions">
+
+            <button type="submit" class="btn btn-primary">
+                Create Order
+            </button>
+
+            <a href="{% url 'order_list' %}"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
